@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using petstore.swagger.io;
 
 namespace PetStore.API.Controllers
@@ -15,23 +18,22 @@ namespace PetStore.API.Controllers
     [ApiController]
     public class PetStoreController : PetStoreControllerBase
     {
-
-        public override Task<Pet> AddPet([FromBody] NewPet body)
+        public override Task<HttpResponseMessage> AddPet([BindRequired, FromBody] NewPet body)
         {
             throw new NotImplementedException();
         }
 
-        public override Task DeletePet(long id)
+        public override Task<HttpResponseMessage> DeletePet([BindRequired] long id)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<ICollection<Pet>> FindPets([FromQuery] IEnumerable<string> tags, [FromQuery] int? limit)
+        public override Task<HttpResponseMessage> FindPets([FromQuery] IEnumerable<string> tags = null, [FromQuery] IEnumerable<string> tags2 = null, [FromQuery] int? limit = null)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<Pet> Find_pet_by_id(long id)
+        public override Task<HttpResponseMessage> Find_pet_by_id([BindRequired] long id)
         {
             throw new NotImplementedException();
         }

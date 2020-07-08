@@ -19,25 +19,26 @@ namespace petstore.swagger.io
     public abstract class PetStoreControllerBase : Microsoft.AspNetCore.Mvc.Controller
     {
         /// <param name="tags">tags to filter by</param>
+        /// <param name="tags2">tags to filter by</param>
         /// <param name="limit">maximum number of results to return</param>
         /// <returns>pet response</returns>
         [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("pets")]
-        public abstract System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Pet>> FindPets([Microsoft.AspNetCore.Mvc.FromQuery] System.Collections.Generic.IEnumerable<string> tags, [Microsoft.AspNetCore.Mvc.FromQuery] int? limit);
+        public abstract System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> FindPets([Microsoft.AspNetCore.Mvc.FromQuery] System.Collections.Generic.IEnumerable<string> tags = null, [Microsoft.AspNetCore.Mvc.FromQuery] System.Collections.Generic.IEnumerable<string> tags2 = null, [Microsoft.AspNetCore.Mvc.FromQuery] int? limit = null);
     
         /// <param name="body">Pet to add to the store</param>
         /// <returns>pet response</returns>
         [Microsoft.AspNetCore.Mvc.HttpPost, Microsoft.AspNetCore.Mvc.Route("pets")]
-        public abstract System.Threading.Tasks.Task<Pet> AddPet([Microsoft.AspNetCore.Mvc.FromBody] NewPet body);
+        public abstract System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> AddPet([Microsoft.AspNetCore.Mvc.FromBody] [Microsoft.AspNetCore.Mvc.ModelBinding.BindRequired] NewPet body);
     
         /// <param name="id">ID of pet to fetch</param>
         /// <returns>pet response</returns>
         [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("pets/{id}")]
-        public abstract System.Threading.Tasks.Task<Pet> Find_pet_by_id(long id);
+        public abstract System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> Find_pet_by_id([Microsoft.AspNetCore.Mvc.ModelBinding.BindRequired] long id);
     
         /// <param name="id">ID of pet to delete</param>
         /// <returns>pet deleted</returns>
         [Microsoft.AspNetCore.Mvc.HttpDelete, Microsoft.AspNetCore.Mvc.Route("pets/{id}")]
-        public abstract System.Threading.Tasks.Task DeletePet(long id);
+        public abstract System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> DeletePet([Microsoft.AspNetCore.Mvc.ModelBinding.BindRequired] long id);
     
     }
 
@@ -101,6 +102,32 @@ namespace petstore.swagger.io
         }
     
     
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.6.2.0 (NJsonSchema v10.1.23.0 (Newtonsoft.Json v12.0.0.0))")]
+    public partial class SwaggerResponse
+    {
+        public int StatusCode { get; private set; }
+
+        public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> Headers { get; private set; }
+        
+        public SwaggerResponse(int statusCode, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers) 
+        {
+            StatusCode = statusCode; 
+            Headers = headers;
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.6.2.0 (NJsonSchema v10.1.23.0 (Newtonsoft.Json v12.0.0.0))")]
+    public partial class SwaggerResponse<TResult> : SwaggerResponse
+    {
+        public TResult Result { get; private set; }
+        
+        public SwaggerResponse(int statusCode, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result) 
+            : base(statusCode, headers)
+        {
+            Result = result;
+        }
     }
 
 }
