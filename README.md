@@ -1,5 +1,5 @@
 # dotnet-openapi-autogen-dockercompose
-Simple example of an "API-first" developetment set up: Define your API, and then auto-generate the libraries for your Server or Client. 
+Simple example of an "API-first" developetment set up: Define your API, and then auto-generate the libraries for your Server or Client using NSwag Studio. 
 
 I'm using Docker compose to run Swagger Editor locally with minimal setup (which will allow us to edit the API file) to service the API specification to the Nswag executable (that gets used by the dotnetcore project via it's MSBuild cycle), but that doesn't have to be part of a larger solution.
 
